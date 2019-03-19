@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/public.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/cart.css' %}"/>
+    <script src="{% static 'js/jquery-1.12.0.js' %}"></script>
+    {#    <script type="text/javascript" src="{% static 'js/public.js' %}"></script>#}
+    <script type="text/javascript" src="{% static 'js/jquery.cookie.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/totals.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jiesuan.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/delete.js' %}"></script>
+
+</head>
+<body>
+<div id="header">
+    <div id="headerOne">
+        <div id="headerOne_c">
+            <div id="headerOne_c_l">
+                <div id="headerOne_c_l_l">
+                    <span><img src="{% static 'img/cn.jpg' %}" alt="" style="width: 16px;height: 10px;"/></span>中国<span><img
+                        src="{% static 'img/index.png' %}" alt=""/></span>
+                    <ul>
+                        <li><img src="{% static 'img/us.jpg' %}"/><span>美国</span></li>
+                        <li><img src="{% static 'img/ko.jpg' %}"/><span>韩国</span></li>
+                        <li><img src="{% static 'img/hk.jpg' %}"/><span>香港</span></li>
+                        <li><img src="{% static 'img/cn.jpg' %}"/><span>中国</span></li>
+                        <li style="font-size: 12px;margin-left: 26px;">Other</li>
+                    </ul>
+                </div>
+                <div id="headerOne_c_l_r">
+                    <span>￥人民币<span><img src="{% static 'img/index.png' %}" alt=""/></span></span>
+                    <ul>
+                        <li><a href="#">$美元</a></li>
+                        <li><a href="#">￥人民币</a></li>
+                        <li><a href="#">HK$港币</a></li>
+                        <li><a href="#">₩韩币</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="headerOne_c_r">
+                <div id="headerOne_c_r_r">
+                    {% if name %}
+                        <span>用户名：{{ name }}</span>   <a href="{% url 'tpsapp:logout' %}">注销</a>
+
+
+                        <div id="headerOne_c_r_r_1">
+                            <div id="headimg">
+                                <img src="http://im6.leaderhero.com/emotion/6684/41161076/8916ae014c.jpg">
+                                <p style="color: #0b3c80;">个人中心</p>
+                            </div>
+
+                            <span><img src="{% static 'img/index.png' %}"></span>
+                            <ul>
+                                <li><a href="#">我的订单</a></li>
+                            </ul>
+                        </div>
+                    {% else %}
+                        <span><a href="{% url 'tpsapp:login' %}" target="_blank">登录</a><a
+                                href="{% url 'tpsapp:login' %}" target="_blank">注册</a></span>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="headerTwo">
+        <div id="headerTwo_c">
+            <img src="{% static 'img/logo.png' %}" id="homepage"/>
+
+        </div>
+    </div>
+
+    <div id="headerNav">
+        <ul>
+            <li><a href="{% url 'tpsapp:homepage' %}">商城主页</a></li>
+            <li><a href="#">新品上市</a></li>
+            <li><a href="#">尖货</a></li>
+            <li><a href="#">面膜</a></li>
+            <li><a href="#">直邮</a></li>
+            <li><a href="#">礼盒</a></li>
+            <li><a href="#">PONY</a></li>
+        </ul>
+    </div>
+</div>
+<div id="gwcContent">
+{#    <span class="span1">全部商品</span><span class="span2">{{ carts.count }}</span><br/><br/>#}
+    <table border="1">
+        <tr height="38px">
+            <th width="450px">商品名称</th>
+            <th width="130px">单价</th>
+            <th width="130px">数量</th>
+            <th width="130px">小计</th>
+            <th width="130px">操作</th>
+        </tr>
+        {% for cart in carts %}
+            {% if name == cart.user.name %}
+                <tr height="38px" class="goods">
+                <td width="450px">{{ cart.products.title }}</td>
+                <td width="130px" class="prices" style="text-align: center">{{ cart.products.price }}</td>
+                <td width="130px" class="numm" style="text-align: center">{{ cart.number }}</td>
+                <td width="130px" class="total" style="text-align: center;"></td>
+                <td width="130px" class="del" style="text-align: center"><a href="{% url 'tpsapp:delete' cart.products.id %}" style="color: red">删除商品</a></td>
+            </tr>
+
+            {% endif %}
+
+        {% endfor %}
+
+        <tr >
+
+            <span class="span6">共<i class="nun" style="color: red;"> {{ carts.count }} </i>件商品 总价（不包含运费）</span><br/>
+            <span class="span7" >￥<i style="color: red"></i></span><br/>
+            <input type="button" class="ck" ident="{{ idtens }}" value="立即结算" style="background: red;color: white"/>
+
+        </tr>
+    </table>
+</div>
+<div id="footer">
+    <div id="footer_c">
+        <div id="footer_c_l">
+        			<span>Copyright&copy;2014-2016 TPS138.com前海云集品 版权所有.粤ICP备14072989号-2<br/>
+        			      食品经营许可证：JY14403040013964
+        			</span>
+            <br/><br/>
+            <span>深圳前海云集品电子商务有限公司<br/>
+        			      汤普森跨境电子商务平台
+        			</span>
+            <br/>
+            <ul>
+                <li><a href="#">&gt;关于我们</a></li>
+                <li><a href="#">&gt;物流配送</a></li>
+                <li><a href="#">&gt;售后服务</a></li>
+                <li><a href="#">&gt;帮助中心</a></li>
+            </ul>
+        </div>
+        <div id="footer_c_m">
+        			<span>联系方式<br/>
+        			      <br/>
+        			      support@tps138.com<br/>
+        			      0755-88695066  
+        			</span>
+        </div>
+        <div id="footer_c_r">
+            <img src="{% static 'img/weixin.jpg' %}" style="width: 160px;height: 160px;"/>
+        </div>
+    </div>
+</div>
+</body>
+</html>

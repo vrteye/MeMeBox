@@ -1,0 +1,102 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登入|注册</title>
+    <script src="{% static 'js/jquery-1.12.0.js' %}"></script>
+    <script src="{% static 'js/regist.js' %}"></script>
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <style>
+        #login{
+            float: left;
+            margin: 30px;
+        }
+        #regis{
+            float: left;
+            margin: 30px;
+
+        }
+    </style>
+
+</head>
+<body>
+
+<h2>顾客注册|登入</h2>
+<span>
+    <a href="{% url 'tpsapp:homepage' %}" style="text-decoration: none">返回首页</a>
+</span>
+<hr />
+    <div id="login">
+    <h3>欢迎回来!</h3>
+
+        <form action="{% url 'tpsapp:login' %}" method="post">
+        {% csrf_token %}
+
+            <table>
+                <tr>
+                    <td align="right">用户名:</td>
+                    <td><input id="account" type="text" name="name"><p style="color: red"></p></td>
+                </tr>
+
+                <tr>
+					<td align="right">密码:</td>
+					<td>
+						<input id="psd" type="password" name="password">
+                        <p style="color: red"></p>
+
+					</td>
+				</tr>
+                <tr>
+                    <td>
+                        {% if err %}
+                            {{ err }}
+                        {% endif %}
+
+                        <input type="submit" value="登录" style="background-color: red;">
+                    </td>
+                </tr>
+            </table>
+
+        </form>
+    </div>
+    <div id="regis">
+     <h3>欢迎注册！</h3>
+         <form action="{% url 'tpsapp:register' %}" method="post">
+        {% csrf_token %}
+            <table>
+                <tr >
+                    <td align="right">用户名:</td>
+                    <td><input id="account1" type="text"  placeholder="至少4位数的账号" name="name"><p style="color: red"></p></td>
+
+                </tr>
+                <tr>
+					<td align="right">创建密码:</td>
+					<td>
+						<input id="psd1" type="password" placeholder="至少6位数的密码" name="password">
+                        <p style="color: red"></p>
+                        <span></span>
+					</td>
+				</tr>
+                 <tr>
+					<td align="right">验证码:</td>
+					<td>
+						<input type="text" name="auth" placeholder="验证码">
+					</td>
+                     <td>
+                        <img src="{% url 'tpsapp:yanzhengma' %}" alt="" />
+                     </td>
+
+				</tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="注册" id="btn">
+                    </td>
+                </tr>
+            </table>
+
+        </form>
+    </div>
+
+</body>
+</html>

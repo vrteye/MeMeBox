@@ -1,0 +1,266 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/public.css' %}"/>
+		<link rel="stylesheet" type="text/css" href="{% static 'css/detailed.css' %}"/>
+
+		<script src="{% static 'js/jquery-1.12.0.js' %}"></script>
+		<script type="text/javascript" src="{% static 'js/jquery.cookie.js' %}" ></script>
+		<script type="text/javascript" src="{% static 'js/detailed.js' %}" ></script>
+        <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+	</head>
+	<body>
+		<div id="header">
+			<div id="headerOne">
+				<div id="headerOne_c">
+					<div id="headerOne_c_l">
+						<div id="headerOne_c_l_l">
+							<span><img src="{% static 'img/cn.jpg' %}" alt="" style="width: 16px;height: 10px;"/></span>中国<span><img src="{% static 'img/index.png' %}"alt=""/></span>
+							<ul>
+								<li><img src="{% static 'img/us.jpg' %}"/><span>美国</span></li>
+								<li><img src="{% static 'img/ko.jpg' %}"/><span>韩国</span></li>
+								<li><img src="{% static 'img/hk.jpg' %}"/><span>香港</span></li>
+								<li><img src="{% static 'img/cn.jpg' %}"/><span>中国</span></li>
+								<li style="font-size: 12px;margin-left: 26px;">Other</li>
+							</ul>
+						</div>
+						<div id="headerOne_c_l_r">
+							<span>￥人民币<span><img src="{% static 'img/index.png' %}"alt=""/></span></span>
+							<ul>
+								<li><a href="#">$美元</a></li>
+								<li><a href="#">￥人民币</a></li>
+								<li><a href="#">HK$港币</a></li>
+								<li><a href="#">₩韩币</a></li>
+							</ul>
+						</div>
+					</div>
+					<div id="headerOne_c_r">
+						<div id="headerOne_c_r_r">
+							{% if name %}
+                                <span>用户名：{{ name }}</span>   <a href="{% url 'tpsapp:logout' %}">注销</a>
+
+
+						    <div id="headerOne_c_r_r_1">
+                                <div id="headimg">
+                                    <img src="http://im6.leaderhero.com/emotion/6684/41161076/8916ae014c.jpg">
+                                    <p style="color: #0b3c80;">个人中心</p>
+                                </div>
+
+                                <span><img src="{% static 'img/index.png' %}"></span>
+						    	<ul>
+						    		<li><a href="#">我的订单</a></li>
+						    	</ul>
+						    </div>
+                            {% else %}
+                                <span><a href="{% url 'tpsapp:login' %}" target="_blank">登录</a><a href="{% url 'tpsapp:login' %}" target="_blank">注册</a></span>
+                            {% endif %}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="headerTwo">
+				<div id="headerTwo_c">
+					<img src="{% static 'img/logo.png' %}"   id="homepage"/>
+                    {% if name %}
+                        <a href="{% url 'tpsapp:cart' %}"><div id="shoppingCart"><img src="{% static 'img/gwc.png' %}"/><span>购物车 &nbsp;&nbsp;<i style="color: black" id="zl"></i></span></div></a>
+                    {% else %}
+                        <div id="shoppingCart"><img src="{% static 'img/gwc.png' %}"/><span>登入后操作</span></div>
+
+                    {% endif %}
+				    </div>
+			</div>
+			
+			<div id="headerNav">
+				<div id="headerNav_n">
+					全部商品分类
+					<img src="{% static 'img/index_rr.png' %}"/>
+				</div>
+				<ul>
+					<li><a href="{% url 'tpsapp:homepage' %}">商城主页</a></li>
+            <li><a href="#">新品上市</a></li>
+            <li><a href="#">尖货</a></li>
+            <li><a href="#">面膜</a></li>
+            <li><a href="#">直邮</a></li>
+            <li><a href="#">礼盒</a></li>
+            <li><a href="#">PONY</a></li>
+				</ul>
+			</div>
+		</div>	
+<!--商品详情部分-->	<!--商品详情部分-->	<!--商品详情部分-->	<!--商品详情部分-->	<!--商品详情部分-->	
+		<div id="box">
+{#			<div id="boxTop">#}
+{#				<img src="{% static 'img/s.jpg' %}"/>#}
+{#				<a href="#">首页</a>#}
+{#				<span>&gt;</span>#}
+{#				<a href="#">家居日用</a>#}
+{#				<span>&gt;</span>#}
+{#				<a href="#">精美餐具</a>#}
+{#				<span>&gt;</span>#}
+{#				<a href="#">碗具</a>#}
+{#				<span>&gt;</span>#}
+{#				<span>艾贝德 高硼硅 微波炉耐热玻璃便当盒2件套带包赠送三件套餐具 多种规格选择 全国包邮</span>				#}
+{#			</div>#}
+		
+			<div id="boxContent">
+				<div id="smallPicBox"><!--商品主图-->	
+					<img src="{% static 'img/8383f07842a550b653dd763712c8f784.jpg' %}" id="smallPic"/>
+					<img src="{% static 'img/33.jpg' %}" id="smallPic2"/>
+					<div id="moveDiv">				
+					</div>
+				</div>	
+				<div id="bigPicBox"><!--商品大图-->
+					<img src="{% static 'img/8383f07842a550b653dd763712c8f784.jpg' %}" id="bigPic"/>
+					<img src="{% static 'img/33.jpg' %}" id="bigPic2"/>
+				</div>
+<!--商品说明-->				
+				<div id="boxContent_r">
+					<div class="baoyou">包邮</div><br /><br />
+					<h3>{{ detail.title }}</h3>
+{#				    <span style="color: red;font-size: 14px;">新疆，西藏，青海，内蒙古偏远地区不发货</span><br /><br />#}
+				    <span style="color: #9c9c9c;">原产地: {{ detail.addr }}</span><br /><br /><br />
+				    <span style="font-size: 12px;color: #888888;">价格：</span><span class="price">￥<i style="font-style: normal;">{{ detail.price }}</i></span>
+				    <span style="font-size: 12px;position: relative;top: 100px;right: 100px; color: #888888;">数量:</span>
+                    <div class="shuliang">
+                        <span id="sub" style="color: blue;height: 27px;line-height: 25px">-</span>
+
+                        <input class="numb" type="text" value="1" style="text-align: center;height: 25px">
+                        <span id="add" style="color: red;height: 27px;line-height: 25px;">+</span>
+
+                    </div>
+
+				</div>
+				<div id="boxBotton">
+					<div id="boxBotton_l">
+						<img src="{% static 'img/8383f07842a550b653dd763712c8f784.jpg' %}" id="ssmallPic1" class="active"/>
+						<img src="{% static 'img/33.jpg' %}" id="ssmallPic2"/>
+					</div>
+					<div id="boxBotton_r">
+                        {% if name %}
+                            <a href="{% url 'tpsapp:cart' %}"><input type="button" id="goumai" value="立即购买" /></a>
+                        {% else %}
+                            <a href="{% url 'tpsapp:login' %}"><input type="button" id="goumai" value="立即购买" /></a>
+
+                        {% endif %}
+
+						<input type="button" id="gwc" value="加入购物车" detailid="{{ detail.id }}"/><i id="wenzi" style="color: royalblue;"></i>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="addSuccess">
+			<div class="addSuccessOne">
+				<img src="{% static 'img/success.png' %}"/>
+				商品添加成功
+			</div>
+			<div class="addSuccessTwo">
+				<input type="button" id="check" value="去结算" />
+				<input type="button" id="continue" value="继续购物" />
+			</div>
+		</div>
+<!--尾部-->	<!--尾部-->	<!--尾部-->	<!--尾部-->	<!--尾部-->	<!--尾部-->		
+		<!--以下是公共底部------>
+			<div class="footer">
+				<div class="first_row">
+					<div class="f_l">
+						<div class="img">
+							<img src="{% static 'img/footer-img/footer-img/genuine.png' %}"/>
+						</div>
+						<div class="word">
+							100%正品
+						</div>
+					</div>
+					<div class="f_l">
+						<img src="{% static 'img/footer-img/footer-img/low.png' %}"/>
+						<div class="word">
+							优质低价
+						</div>
+					</div>
+					<div class="f_l">
+						<img src="{% static 'img/footer-img/footer-img/deliver.png' %}"/>
+						<div class="word">
+							极速发货
+						</div>
+					</div>
+					<div class="f_l">
+						<img src="{% static 'img/footer-img/footer-img/refund.png' %}"/>
+						<div class="word">
+							退换无忧
+						</div>
+					</div>
+				</div>
+
+				<div class="second_row">
+					<div class="sec_wrap_first">
+						<div class="wrap_first_top">
+							<img src="{% static 'img/footer-img/footer-img/szj.jpg' %}"/>
+						</div>
+						<div class="wrap_first_middle">
+							关于我们
+						</div>
+						<div class="wrap_first_bottom">
+							<img src="{% static 'img/footer-img/footer-img/meme.png' %}"/>
+							<img src="{% static 'img/footer-img/footer-img/wechat.png' %}"/>
+							<img src="{% static 'img/footer-img/footer-img/sina.png' %}"/>
+						</div>
+					</div>
+					<div class="sec_wrap_second">
+						<ul>
+							<li class="sec_title">关于美美箱</li>
+							<li><a href="#">美美全球</a></li>
+							<li><a href="#">品牌优势</a></li>
+							<li><a href="#">消费保障</a></li>
+						</ul>
+						<ul>
+							<li class="sec_title">帮助中心</li>
+							<li><a href="#">常见问题</a></li>
+							<li><a href="#">账户相关</a></li>
+							<li><a href="#">包邮政策</a></li>
+							<li><a href="#">支付相关</a></li>
+							<li><a href="#">物流相关</a></li>
+							<li><a href="#">退换政策</a></li>
+						</ul>
+						<ul>
+							<li class="sec_title">服务协议</li>
+							<li><a href="#">服务协议</a></li>
+							<li><a href="#">个人网申协议</a></li>
+						</ul>
+						<ul>
+							<li class="sec_title">联系我们</li>
+							<li><a href="#">商务合作</a></li>
+							<li><a href="#">分销合作</a></li>
+							<li><a href="#">加入我们</a></li>
+						</ul>
+					</div>
+				</div>
+
+
+				<div class="third_row">
+						<div class="third_row_top">
+							联系客服
+						</div>
+						<div class="third_row_bottom">
+							<span>
+								客服时间：周一~周日(9:00&nbsp;-&nbsp;21:00)
+							</span>
+							<span>
+								客服热线: 400-720-9967
+							</span>
+							<span>
+								客服邮箱 :kf@memeboxglobal.com
+							</span>
+						</div>
+					</div>
+				<div class="fourth_row">
+						<span class="left">&copy;2015 Memebox Corporation. All Rights Reserved.</span>
+						<div class="fourth_row_right">
+							<a href="#"><img src="{% static 'img/footer-img/footer-img/icon.gif' %}"/></a>
+							<span>蜜米柏克思（上海）商贸有限公司 上海市杨浦区政立路415号中航天盛广场A座6楼 沪ICP备14043341号</span>
+						</div>
+				</div>
+			</div>
+	</body>
+</html>
